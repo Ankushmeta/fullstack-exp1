@@ -1,23 +1,21 @@
-import React, { memo } from 'react';
-import { AppProvider, useAppContext } from './AppContext';
-
-const ContextCounter = memo(() => {
-  const { count, increment, decrement } = useAppContext();
-  
-  return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>Simple Counter App</h1>
-      <h2>Counter: {count}</h2>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
-    </div>
-  );
-});
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { AuthProvider } from './AuthContext';
+import Login from './Login';
+import ProductList from './ProductList';
 
 const App = () => (
-  <AppProvider>
-    <ContextCounter />
-  </AppProvider>
+  <Provider store={store}>
+    <AuthProvider>
+      <div style={{ padding: '20px' }}>
+        <h1>State Management Demo</h1>
+        <p>Context API for Auth + Redux Toolkit for Products</p>
+        <Login />
+        <ProductList />
+      </div>
+    </AuthProvider>
+  </Provider>
 );
 
 export default App;
